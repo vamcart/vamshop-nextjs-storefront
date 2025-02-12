@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 
 import Currency from "@/components/ui/currency";
 import IconButton from "@/components/ui/icon-button";
-//import usePreviewModal from "@/hooks/use-preview-modal";
-//import useCart from "@/hooks/use-cart";
+import usePreviewModal from "@/hooks/use-preview-modal";
+import useCart from "@/hooks/use-cart";
 import { Product } from "@/types";
 
 interface ProductCard {
@@ -16,8 +16,8 @@ interface ProductCard {
 }
 
 const ProductCard: React.FC<ProductCard> = ({ data }) => {
-  //const previewModal = usePreviewModal();
-  //const cart = useCart();
+  const previewModal = usePreviewModal();
+  const cart = useCart();
   const router = useRouter();
 
   const handleClick = () => {
@@ -44,7 +44,7 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
       {/* Image & actions */}
       <div className="aspect-square rounded-xl bg-gray-100 relative">
         <Image
-          src={data.images?.[0]?.url}
+          src={data?.images?.[0]?.url}
           alt=""
           fill
           className="aspect-square object-cover rounded-md"
@@ -62,12 +62,10 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
           </div>
         </div>
       </div>
-      {/* Description */}
       <div>
         <p className="font-semibold text-lg">{data.name}</p>
         <p className="text-sm text-gray-500">{data.category?.name}</p>
       </div>
-      {/* Price & Reiew */}
       <div className="flex items-center justify-between">
         <Currency value={data?.price} />
       </div>
